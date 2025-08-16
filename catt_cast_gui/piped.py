@@ -221,6 +221,9 @@ def main(argv):
     except Exception as e:
         print(f"error: request failed: {e}", file=sys.stderr)
         return 1
+def main_cli():
+    """Wrapper for the console_script entry point."""
+    sys.exit(main(sys.argv[1:]))
 
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))

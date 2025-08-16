@@ -26,13 +26,13 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt, QThread, QObject, pyqtSignal, QTimer
 
 try:
-    from piped_get_url import get_best_piped_url, extract_video_id
+    from catt_cast_gui.piped import get_best_piped_url, extract_video_id
     GET_PIPED_URL_AVAILABLE = True
 except ImportError:
     GET_PIPED_URL_AVAILABLE = False
     # Define dummy functions so the rest of the code doesn't crash if the file is missing.
     def get_best_piped_url(*args, **kwargs):
-        raise ImportError("piped_get_url.py not found in the same directory as catt-cast-gui.py")
+        raise ImportError("could not import 'catt_cast_gui.piped' module. Piped URL functionality is disabled.")
 
     def extract_video_id(url: str) -> Optional[str]:
         # A simple fallback for the YouTube URL check.
