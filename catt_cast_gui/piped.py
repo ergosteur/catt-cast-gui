@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-piped_best_url.py — get the best *direct* (progressive) stream URL from a Piped instance.
+{prog} — get the best *direct* (progressive) stream URL from a Piped instance.
 Falls back to HLS (m3u8) or DASH (mpd) if a progressive stream doesn't exist.
 
 Usage:
-  ./piped_best_url.py <youtube-url-or-id>
-  ./piped_best_url.py --base https://api.piped.example.com <id>
-  ./piped_best_url.py --prefer-container mp4 --prefer-codecs h264,av1 <id>
+  {prog} <youtube-url-or-id>
+  {prog} --base https://api.piped.example.com <id>
+  {prog} --prefer-container mp4 --prefer-codecs h264,av1 <id>
 
 Exit codes:
   0  success (printed a URL)
@@ -20,6 +20,7 @@ Notes:
 """
 
 import sys
+import os
 import json
 import urllib.request
 import urllib.parse
@@ -166,8 +167,10 @@ def get_best_piped_url(
     raise ValueError("No suitable stream URL found (no progressive/HLS/DASH available).")
 
 def main(argv):
+    prog = os.path.basename(sys.argv[0])
+    usage = __doc__.format(prog=prog).strip()
     if not argv or argv[0] in ("-h", "--help"):
-        print(__doc__.strip())
+        print(usage)
         return 1
 
     base = DEFAULT_BASE
@@ -201,7 +204,7 @@ def main(argv):
             i += 1
 
     if not args:
-        print("error: missing video URL or ID\n\n" + __doc__.strip(), file=sys.stderr)
+        print("error: missing video URL or ID\n\n" + usage, file=sys.stderr)
         return 1
 
     video_url_or_id = args[0]
