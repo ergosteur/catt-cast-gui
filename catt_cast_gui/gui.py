@@ -1,11 +1,8 @@
 import sys
 import shutil
 import os
-import json
 import subprocess
-import urllib.request
-import urllib.parse
-from typing import Optional, Dict, Any, List, Tuple
+from typing import Optional
 from PyQt5.QtWidgets import (
     QApplication,
     QMainWindow,
@@ -18,11 +15,10 @@ from PyQt5.QtWidgets import (
     QLabel,
     QFileDialog,
     QSlider,
-    QCheckBox
-,
+    QCheckBox,
     QStyle
 )
-from PyQt5.QtGui import QIcon
+
 from PyQt5.QtCore import Qt, QThread, QObject, pyqtSignal, QTimer
 
 try:
